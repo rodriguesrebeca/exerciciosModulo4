@@ -1,0 +1,22 @@
+body {
+    font-family: 'Zen Kurenaido', sans-serif;
+    background-color: rgb(227, 238, 202);
+    margin: 5%;
+}
+
+button {
+    padding: 3px 10px;
+    border-radius: 5px;
+    border-style: none;
+    cursor: pointer;
+    background-color: rgb(212, 212, 212);
+}
+
+button:hover {
+    background-color: white;
+}
+
+li { 
+    font-weight: bold;
+    font-size: large;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <title>Registro de Usuários</title>
+</head>
+<body>
+    <h1>registro de usuários</h1>
+    <form>
+        <input type="text" id="usuario" required>
+        <button type="submit" >adicionar</button>
+    </form>
+
+    <section>
+        <h2>lista de usuários:</h2>
+        <ul></ul>
+    </section>
+</body>
+<script>
+    const form = document.querySelector("form")
+    const input = document.querySelector("input")
+    const listaUsuario = document.querySelector("ul")
+    
+
+    function criarUsuario() {
+        const novoUsuario = document.createElement("li");
+        novoUsuario.innerText = (input.value) + " ";
+        listaUsuario.appendChild(novoUsuario);
+        criarBotaoRemover(novoUsuario);
+        
+    }
+
+    function criarBotaoRemover(usuario) {
+        const botaoRemover = document.createElement("button");
+        botaoRemover.textContent = "remover";
+        botaoRemover.classList.add("removerBotao");
+        usuario.appendChild(botaoRemover);
+        botaoRemover.onclick = () => usuario.remove();
+    }
+
+
+    function limparInput() {
+        input.value = "";
+    }
+
+    form.addEventListener("submit", function (evt){
+        evt.preventDefault();
+        criarUsuario();
+        limparInput();
+    })
+
+
+
+</script>
+</html>

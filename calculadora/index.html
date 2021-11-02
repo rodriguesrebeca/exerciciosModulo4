@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
+    <title>Calculadora</title>
+</head>
+<body>
+    <h1>calculadora</h1>
+    <p>
+        - Adicione um número e aperte "enter".
+        <br>
+        - Adicione outro número e aperte "enter" novamente.
+        <br>
+        - Selecione a operação desejada (soma, subtração, multiplicação ou divisão)
+        <br>
+        - Aperte resultado.
+        <br>
+        - Para limpar o "resultado" aperte "reset".
+    </p>
+    
+    <input type="number" id="numero">
+    <button type="button" id="enter">enter</button>
+
+    <div>
+        <input type="radio" id="soma" value="+" name="operador">
+        <label for="soma">soma</label>
+
+        <input type="radio" id="subtracao" value="-" name="operador">
+        <label for="subtracao">subtração</label>
+
+        <input type="radio" id="multiplicacao" value="*" name="operador">
+        <label for="multiplicacao">multiplicação</label>
+
+        <input type="radio" id="divisao" value="/" name="operador">
+        <label for="divisao">divisão</label>
+    </div>
+    
+    <button type="button" id="resultado">resultado</button>
+    <h2>resultado: <span id="total">0</span></h2> 
+    <button type="button" id="limparResultado">reset</button>
+    
+    <script>
+
+        let calculadora = (() => {
+            let inputs = [];
+            const enterBotao = document.querySelector("#enter")
+            const limparInput = () => document.querySelector("input").value = ""
+            const limparResultado = document.querySelector("#limparResultado")
+                
+            const subtracao = (a,b) => a - b; 
+            const soma = (a,b) => a + b;
+            const multiplicacao = (a,b) => a * b;
+            const divisao = (a,b) =>  a / b;
+
+            const operadores = {
+                    '-': subtracao,
+                    '+': soma,
+                    '*': multiplicacao,
+                    '/': divisao
+            };
+
+
+            const guardarValor = () => {
+               const valor = Number(document.querySelector("input").value)
+                inputs = [...inputs, valor]
+                limparInput();
+            }
+
+            enterBotao.onclick = function() {
+                guardarValor();
+                limparInput();             
+            }
+
+            const equals = () => {
+                const [a,b] = inputs;
+                const selecionaOperador = document.querySelector("input[type='radio']:checked").value;
+                const operador = operadores[selecionaOperador]
+    
+                if (operador) {
+                    document.querySelector("#total").innerText = operador(a,b);
+                } 
+
+                inputs = []
+                limparInput()
+                
+                limparResultado.onclick = () => {
+                    document.querySelector("#total").innerText = operador(a,b).value = 0;
+            }
+            };
+
+            const resultadoBotao = document.querySelector("#resultado")
+
+            resultadoBotao.onclick = () => {
+                equals()
+            }
+          
+        })()
+    </script>
+</body>
+</html>
